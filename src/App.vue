@@ -8,6 +8,9 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import store from './scripts/store';
+import axios from 'axios';
+import { useRoute } from 'vue-router';
+import { watch } from 'vue';
 
 export default {
   name: 'App',
@@ -16,11 +19,18 @@ export default {
     Header
   },
   setup() {
-    const id = sessionStorage.getItem("id");
+    const check = () => {
+      axios.get("/api/account/check").then(({data}) => {
+        console.log(data);
+          store.commit("setAccount", data || 0); // 로그인 상태를 Vuex 스토어에 저장
+      })
+    };
 
-    if(id) {
-      store.commit("setAccount", id);
-    }
+    const route = useRoute(); // 현재 활성화된 라우트를 감지하기 위해 사용
+
+    watch(route, () => {
+      check(); // 라우트가 변경될 때마다 check 함수를 실행해 로그인 상태 확인
+    })
   }
 }
 </script>

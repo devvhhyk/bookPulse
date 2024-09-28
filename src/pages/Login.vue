@@ -49,7 +49,7 @@ export default {
       })
     }
 
-    return {state, submit}
+    return {state, submit}; // 상태, 메서드 반환
   }
 }
 </script>

@@ -26,10 +26,10 @@ export default {
     });
 
     axios.get("/api/items").then(({ data }) => {
-      state.items = data;
+      state.items = data; // 서버에서 데이터를 받아온 후 상태에 저장
     });
 
-    return { state };
+    return { state }; // 서버에서 데이터를 받아옴
   },
 };
 </script>

@@ -6,12 +6,12 @@ const store = createStore({
   state () {
     return {
       account: {
-        id: 0
+        id: 0 // 로그인 상태 관리
       }
     }
   },
-  mutations: {
-    setAccount(state, payload) {
+  mutations: { // 상태 변경 메서드
+    setAccount(state, payload) { // 계정 상태를 변경하는 함수
       state.account.id = payload;
     }
   }
