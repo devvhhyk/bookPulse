@@ -25,11 +25,16 @@ export default {
       items: [],
     });
 
-    axios.get("/api/items").then(({ data }) => {
-      state.items = data; // 서버에서 데이터를 받아온 후 상태에 저장
-    });
+    // 백엔드에서 도서 목록을 가져오는 API 호출
+    axios.get("/api/books")
+      .then(({ data }) => {
+        state.items = data;
+      })
+      .catch(error => {
+        console.error("Error fetching books:", error);
+      });
 
-    return { state }; // 서버에서 데이터를 받아옴
+    return { state };
   },
 };
 </script>

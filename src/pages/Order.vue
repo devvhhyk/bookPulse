@@ -4,9 +4,6 @@
       <main>
         <div class="py-5 text-center">
           <h2>주문하기</h2>
-          <p class="lead">
-            Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.
-          </p>
         </div>
         <div class="row g-5">
           <div class="col-md-5 col-lg-4 order-md-last">
@@ -22,7 +19,7 @@
                   <h6 class="my-0">{{i.name}}</h6>
                 </div>
                 <span class="text-muted">
-                  {{lib.getNumberFormatted(i.price - i.price * i.discountPer / 100)}}원
+                  {{lib.getNumberFormatted(i.price)}}원
                 </span>
               </li>
             </ul>
@@ -106,7 +103,7 @@ export default {
       args.items = JSON.stringify(state.items);
 
       axios.post("/api/orders", args).then(() => {
-        alert("주문을 완료하였습니다.")
+        alert("주문을 완료하였습니다.");
         router.push({path:"/orders"})
       })
     }
@@ -116,7 +113,7 @@ export default {
       let result = 0;
 
       for(let i of state.items) {
-        result += i.price - i.price * i.discountPer / 100;
+        result += i.price;
       }
 
       return result;

@@ -18,7 +18,8 @@
             <td>{{o.address}}</td>
             <td>{{o.payment}}</td>
             <td>
-              <div v-for="(i, idx2) in o.items" :key="idx2">{{i.name}}</div>
+              <!-- 구입 항목 출력 -->
+              <div v-for="(i, idx2) in o.items" :key="idx2">{{i.title}}</div>
             </td>
           </tr>
         </tbody>
@@ -30,7 +31,6 @@
 <script>
 import { reactive } from "vue";
 import axios from "axios";
-import lib from "@/scripts/lib";
 
 export default {
   setup() {
@@ -40,17 +40,26 @@ export default {
 
     // 주문 데이터 가져오기
     axios.get("/api/orders").then(({data}) => {
+      console.log(data); // 서버에서 받은 데이터 확인
       state.orders = [];
 
+      // 주문 목록을 반복 처리하면서 items를 확인
       for(let d of data) {
         if(d.items) {
-          d.items = JSON.parse(d.items);
+          // items가 문자열로 넘어온다면 JSON.parse를 사용
+          try {
+            d.items = typeof d.items === 'string' ? JSON.parse(d.items) : d.items;
+          } catch(e) {
+            console.error('Error parsing items:', e);
+          }
         }
         state.orders.push(d);
       }
-    })
+    }).catch((error) => {
+      console.error("Error loading orders", error);
+    });
 
-    return { state, lib };
+    return { state };
   },
 };
 </script>

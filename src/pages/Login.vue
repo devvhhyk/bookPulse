@@ -20,8 +20,11 @@
       </label>
     </div>
     <button class="btn btn-primary w-100 py-2" @click="submit()">Sign in</button>
-    <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
-</div>
+
+    <div class="text-center mt-3">
+      <p>계정이 없으신가요? <a @click="goToSignUp">회원가입</a></p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,6 +41,11 @@ export default {
         password:""
       }
     })
+    
+    // 회원가입 페이지로 이동하는 함수
+    const goToSignUp = () => {
+      router.push({ path: "/signup" });
+    }
 
     const submit = () => {
       axios.post("/api/account/login", state.form).then((res) => {
@@ -51,7 +59,7 @@ export default {
       })
     }
 
-    return {state, submit}; // 상태, 메서드 반환
+    return {state, goToSignUp, submit};
   }
 }
 </script>
@@ -76,5 +84,11 @@ export default {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.text-center a {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
 }
 </style>

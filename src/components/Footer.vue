@@ -1,11 +1,18 @@
 <template>
-<footer class="text-body-secondary py-5">
-    <div class="container">
-      <p class="float-end mb-1">
-        <a href="#">Back to top</a>
-      </p>
-      <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-      <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
+  <footer class="footer py-5">
+    <div class="container text-center">
+      <p>&copy; 2024 Bookpulse Website. All Rights Reserved.</p>
+      <div class="social-links">
+        <a href="https://facebook.com" target="_blank">
+          <i class="fa fa-facebook"></i>
+        </a>
+        <a href="https://twitter.com" target="_blank">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank">
+          <i class="fa fa-instagram"></i>
+        </a>
+      </div>
     </div>
   </footer>
 </template>
@@ -17,5 +24,19 @@ export default {
 </script>
 
 <style scoped>
+.footer {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
 
+.footer .social-links a {
+  margin: 0 10px;
+  color: #6c757d;
+  font-size: 20px;
+  transition: color 0.3s;
+}
+
+.footer .social-links a:hover {
+  color: #000;
+}
 </style>
